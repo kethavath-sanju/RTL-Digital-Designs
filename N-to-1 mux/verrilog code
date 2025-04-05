@@ -1,0 +1,15 @@
+module mux #(parameter N = 4) ( // 2^N inputs
+    input  [(1<<N)-1:0] in,     // input lines
+    input  [N-1:0] sel,         // select lines
+    output reg out              // output
+);
+    integer i;
+
+    always @(*) begin
+        out = 0;
+        for (i = 0; i < (1 << N); i = i + 1) begin
+            if (sel == i)
+                out = in[i];
+        end
+    end
+endmodule

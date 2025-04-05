@@ -1,0 +1,23 @@
+module tb_mux;
+    parameter N = 3;  // 8-to-1 MUX
+
+    reg  [(1<<N)-1:0] in;
+    reg  [N-1:0] sel;
+    wire out;
+
+    mux #(N) uut (
+        .in(in),
+        .sel(sel),
+        .out(out)
+    );
+
+    initial begin
+        in = 8'b10101010; // Example pattern
+        $display("Sel\tOut");
+        for (integer i = 0; i < (1 << N); i = i + 1) begin
+            sel = i;
+            #1 $display("%b\t%b", sel, out);
+        end
+        $finish;
+    end
+endmodule
